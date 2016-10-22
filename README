@@ -1,0 +1,46 @@
+This network auditing tool will help you to determine what basic spoofing filters are pressent between
+two testpoints on two networks, and what anti spoofing filters are missing. They tools are designed to
+work between endpoints that would not normaly have any filtering between them exept for anti-spoofing
+filters.
+
+In order to determine the spoofing filtering setup of a network three types of spoofed adresses are needed, 
+and two test directions, this will give an almost complete picture of the spoofing filters pressent, 
+although for some spoofing filters the location  may not be completely clear by a single measurement, and
+a 3th point may be needed in order to find the location of the filters.
+
+Basicaly there are 3 kinds of adresses that could be used in spoofing:
+
+* Adresses that fall within the network of the target (TS), these should be filtered by the border routers 
+  of the target, any normal network operator will have these filters in place, any network without these
+  filters mostly falls into the category of MCSE administered networks and networks run by 13 year old kids.
+
+* Adresses that fall outside of both networks (FS). These should be filtered by the border router of the 
+  source network.  Any admin with some sense will install these filters, unfortunately it seems that
+  some ISP's don't do this, mostly these are the type of ISP's that have a admin crue that has likes 
+  to be able to spoof itself, you should probably have some second thougths if you want to be on a network 
+  that is either run by a bunch of hackers or by a bunch of not to competent admins.
+   
+* Adresses that fall within the network of the spoofer (LS), these could be filtered in terminal servers of 
+  the source network. There seems to be only a hand full of ISP's that still use this, looks like that is 
+  what you get from letting the telco's run this end of the network. The risk of not having these filters 
+  is fairly limmited, but if you have a choice go for a network that does have these filters if you can 
+  find any.
+
+
+The toolkit exists of two litle cute perl scripts that are to be run on two different testpoint machines
+on the two networks. The scripts both require the Net::RawIP perl module that can be found on cpan, and
+both need to run as root. Please note that no security review has yet been done on the code in its
+current alpha state (and I don't know if i'll have the time to do it), so be carefull where you run it,
+and dont keep the server running.
+The server is started without any parameters.
+The server needs three parameters in order to make a complete audit:
+
+* The IP adress of the server
+* A ip adress on the clients network that it can use to see if it can spoof this.
+* A ip adress on the servers network that it can use to see if it can spoof this.
+
+No adress outside these networks is needed as the DNS A routserver adress
+is used for this as a unlikely ip adress to be on either of the two networks.
+
+Ghede 11/2000
+
